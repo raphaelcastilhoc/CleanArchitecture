@@ -12,9 +12,9 @@ namespace CleanArchitecture.Application.UseCases.EmployeeUseCases
             _employeeRepository = employeeRepository;
         }
 
-        public async Task ExecuteAsync(RegisterEmployeeUseCaseInput employeeInput)
+        public async Task ExecuteAsync(RegisterEmployeeUseCaseInput input)
         {
-            var employee = new Employee(employeeInput.Name, employeeInput.Salary);
+            var employee = new Employee(input.Name, input.Salary);
             await _employeeRepository.AddAsync(employee);
         }
     }

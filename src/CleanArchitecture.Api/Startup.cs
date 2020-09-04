@@ -35,7 +35,8 @@ namespace CleanArchitecture.Api
                 return new MongoDbFactory(Configuration).GetDatabase();
             })
             .AddScoped<IEmployeeRepository, EmployeeRepository>()
-            .AddScoped<IRegisterEmployeeUseCase, RegisterEmployeeUseCase>();
+            .AddScoped<IRegisterEmployeeUseCase, RegisterEmployeeUseCase>()
+            .AddScoped<IRaiseEmployeeSalaryUseCase, RaiseEmployeeSalaryUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

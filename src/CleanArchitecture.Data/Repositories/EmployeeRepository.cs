@@ -4,18 +4,27 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Data.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
-        private readonly IMongoCollection<Employee> _employees;
-
-        public EmployeeRepository(IMongoDatabase database)
+        public EmployeeRepository(IMongoDatabase database) 
+            : base(database, "employees")
         {
-            _employees = database.GetCollection<Employee>("employee");
+        }
+
+        public async Task<Employee> Get(string id)
+        {
+            var employee = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return employee;
         }
 
         public async Task AddAsync(Employee employee)
         {
-            await _employees.InsertOneAsync(employee);
+            await _collection.InsertOneAsync(employee);
+        }
+
+        public async Task UpdateAsync(Employee employee)
+        {
+            await _collection.ReplaceOneAsync(x => x.Id == employee.Id, employee, new ReplaceOptions { IsUpsert = true });
         }
     }
 }

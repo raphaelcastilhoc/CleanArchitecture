@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CleanArchitecture.Domain.SeedWork;
+using System;
 
 namespace CleanArchitecture.Domain.Aggregates.EmployeeAggregate
 {
-    public class Employee
+    public class Employee : Entity, IAggregateRoot
     {
         public Employee(string name, decimal salary)
         {
@@ -10,10 +11,18 @@ namespace CleanArchitecture.Domain.Aggregates.EmployeeAggregate
             Salary = salary;
         }
 
-        public string Id { get; private set; }
-
         public string Name { get; private set; }
 
         public decimal Salary { get; private set; }
+
+        public void RaiseSalary(decimal salary)
+        {
+            if(salary <= Salary)
+            {
+                throw new InvalidOperationException("Salary must be greater than current salary");
+            }
+
+            Salary = salary;
+        }
     }
 }

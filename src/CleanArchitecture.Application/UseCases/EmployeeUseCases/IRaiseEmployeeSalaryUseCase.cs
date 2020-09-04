@@ -2,8 +2,8 @@
 
 namespace CleanArchitecture.Application.UseCases.EmployeeUseCases
 {
-    public interface IRegisterEmployeeUseCase
+    public interface IRaiseEmployeeSalaryUseCase
     {
-        Task ExecuteAsync(RegisterEmployeeUseCaseInput input);
+        Task ExecuteAsync(RaiseEmployeeSalaryUseCaseInput input);
     }
 }
