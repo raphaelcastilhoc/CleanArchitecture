@@ -15,7 +15,7 @@ namespace CleanArchitecture.Application.UseCases.EmployeeUseCases
 
         public async Task ExecuteAsync(RaiseEmployeeSalaryUseCaseInput input)
         {
-            var employee = await _employeeRepository.Get(input.Id);
+            var employee = await _employeeRepository.GetAsync(input.Id);
             if (employee == null)
             {
                 throw new InvalidOperationException("Employee not found");

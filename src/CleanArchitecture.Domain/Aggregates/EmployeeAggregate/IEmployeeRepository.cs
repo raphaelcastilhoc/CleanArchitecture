@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Domain.Aggregates.EmployeeAggregate
 {
     public interface IEmployeeRepository
     {
-        Task<Employee> Get(string id);
+        Task<IEnumerable<Employee>> GetAsync();
+
+        Task<Employee> GetAsync(string id);
 
         Task AddAsync(Employee employee);
 

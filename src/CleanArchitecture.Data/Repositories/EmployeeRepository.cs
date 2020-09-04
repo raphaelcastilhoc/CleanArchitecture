@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Domain.Aggregates.EmployeeAggregate;
 using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CleanArchitecture.Data.Repositories
@@ -11,7 +12,13 @@ namespace CleanArchitecture.Data.Repositories
         {
         }
 
-        public async Task<Employee> Get(string id)
+        public async Task<IEnumerable<Employee>> GetAsync()
+        {
+            var employees = await _collection.Find(_ => true).ToListAsync();
+            return employees;
+        }
+
+        public async Task<Employee> GetAsync(string id)
         {
             var employee = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
             return employee;

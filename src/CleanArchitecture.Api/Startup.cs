@@ -1,3 +1,5 @@
+using AutoMapper;
+using CleanArchitecture.Application.AutoMapperProfiles;
 using CleanArchitecture.Application.UseCases.EmployeeUseCases;
 using CleanArchitecture.Data;
 using CleanArchitecture.Data.Repositories;
@@ -30,11 +32,13 @@ namespace CleanArchitecture.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HumanResourcesApi", Version = "v1" });
             })
-            .AddSingleton<IMongoDatabase>(x => 
+            .AddSingleton<IMongoDatabase>(x =>
             {
                 return new MongoDbFactory(Configuration).GetDatabase();
             })
+            .AddAutoMapper(typeof(EmployeeProfile).Assembly)
             .AddScoped<IEmployeeRepository, EmployeeRepository>()
+            .AddScoped<IGetEmployeesUseCase, GetEmployeesUseCase>()
             .AddScoped<IRegisterEmployeeUseCase, RegisterEmployeeUseCase>()
             .AddScoped<IRaiseEmployeeSalaryUseCase, RaiseEmployeeSalaryUseCase>();
         }
