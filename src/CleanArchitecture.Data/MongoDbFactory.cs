@@ -22,7 +22,7 @@ namespace CleanArchitecture.Data
         {
             var url = new MongoUrl(_configuration.GetConnectionString("Mongo"));
             var client = new MongoClient(url);
-            var database = client.GetDatabase("HumanResources");
+            var database = client.GetDatabase("HumanResources_CleanArchitecture");
 
             var conventionPack = new ConventionPack {
                 new IgnoreExtraElementsConvention(true)
